@@ -156,9 +156,14 @@ namespace :redmine do
           #replace exotic characters with their hex representation to avoid invalid filenames
           trac_file = filename.gsub( /[^a-zA-Z0-9\-_\.!~*']/n ) do |x|
             codepoint = RUBY_VERSION < '1.9' ? x[0] : x.codepoints.to_a[0]
-            sprintf('%%%02x', codepoint)
+            sprintf('%%%02X', codepoint)
           end
-          "#{TracMigrate.trac_attachments_directory}/#{attachment_type}/#{id}/#{trac_file}"
+          trac_id = id.gsub( /[^a-zA-Z0-9\-_\.!~*']/n ) do |x|
+            codepoint = RUBY_VERSION < '1.9' ? x[0] : x.codepoints.to_a[0]
+            sprintf('%%%02X', codepoint)
+          end
+          print "\n", "#{attachment_type}/#{trac_id}/#{trac_file}"
+          "#{TracMigrate.trac_attachments_directory}/#{attachment_type}/#{trac_id}/#{trac_file}"
         end
       end
 
