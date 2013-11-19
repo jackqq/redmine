@@ -14,7 +14,7 @@
 <% end %>
 
 <p><%= f.text_field :firstname, :required => true %></p>
-<p><%= f.text_field :lastname, :required => true %></p>
+<p><%= f.text_field :lastname, :required => false %></p>
 <p><%= f.text_field :mail, :required => true %></p>
 
 <% unless @user.force_default_language? %>
