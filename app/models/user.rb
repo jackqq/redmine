@@ -89,13 +89,13 @@ class User < Principal
   LOGIN_LENGTH_LIMIT = 60
   MAIL_LENGTH_LIMIT = 60
 
-  validates_presence_of :login, :firstname, :lastname, :mail, :if => Proc.new { |user| !user.is_a?(AnonymousUser) }
+  validates_presence_of :login, :firstname, :mail, :if => Proc.new { |user| !user.is_a?(AnonymousUser) }
   validates_uniqueness_of :login, :if => Proc.new { |user| user.login_changed? && user.login.present? }, :case_sensitive => false
   validates_uniqueness_of :mail, :if => Proc.new { |user| user.mail_changed? && user.mail.present? }, :case_sensitive => false
   # Login must contain letters, numbers, underscores only
   validates_format_of :login, :with => /\A[a-z0-9_\-@\.]*\z/i
   validates_length_of :login, :maximum => LOGIN_LENGTH_LIMIT
-  validates_length_of :firstname, :lastname, :maximum => 30
+  validates_length_of :firstname, :maximum => 30
   validates_format_of :mail, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, :allow_blank => true
   validates_length_of :mail, :maximum => MAIL_LENGTH_LIMIT, :allow_nil => true
   validates_confirmation_of :password, :allow_nil => true
