@@ -1,0 +1,3 @@
+[submodule "plugins/redmine_digest"]
+	path = plugins/redmine_digest
+	url = https://github.com/jackqq/redmine_digest.git
